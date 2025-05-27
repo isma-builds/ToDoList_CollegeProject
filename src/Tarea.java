@@ -1,9 +1,10 @@
 import javax.swing.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
-public abstract class Tarea {
+public abstract class Tarea implements Serializable {
     private String descripcion;
     private final LocalDate fechaCreacion = LocalDate.now();
     private int prioridad = 0;

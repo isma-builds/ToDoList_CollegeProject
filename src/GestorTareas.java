@@ -1,6 +1,7 @@
 
 
 import javax.swing.*;
+import java.io.*;
 import java.util.ArrayList;
 
 public class GestorTareas {
@@ -50,7 +51,7 @@ public class GestorTareas {
             String desc = JOptionPane.showInputDialog("Tarea:");
 
             String[] seleccionEst = {"Completada", "Pendiente"};
-            String est = (String) JOptionPane.showInputDialog(null, "Selecciona una opción", "Estado", JOptionPane.PLAIN_MESSAGE, null, seleccionEst, seleccionEst[0]);
+            String est = (String) JOptionPane.showInputDialog(null, "Selecciona una opción", "Estado", JOptionPane.PLAIN_MESSAGE, null, seleccionEst, seleccionEst[1]);
             String[] seleccionPrd = {"Alta", "Media", "Baja"};
             String prdString = (String) JOptionPane.showInputDialog(null, "Selecciona una opción", "Prioridad", JOptionPane.PLAIN_MESSAGE, null, seleccionPrd, seleccionPrd[0]);
             int prioridad = prdString.equals("Alta") ? 1 : prdString.equals("Media") ? 2 : 3;
@@ -182,5 +183,32 @@ public class GestorTareas {
             }while(!actualizarOpt.equals("Regresar"));
             verTareas();
         }
+    }
+    //Guardar la lista de tareas en un archivo
+    public void guardarArchivo() throws IOException {
+        File objFile = new File("ToDoList.dat");
+        FileOutputStream flujoSalida = new FileOutputStream(objFile);
+        ObjectOutputStream flujoSalidaObj = new ObjectOutputStream(flujoSalida);
+        flujoSalidaObj.writeObject(listaTareas);
+    }
+    //Leer el archivo ToDoList creado
+
+    public void leerArchivo() throws IOException {
+        File objFile = new File("ToDoList.dat");
+        FileInputStream fis = new FileInputStream(objFile);
+        ObjectInputStream ois = new ObjectInputStream(fis);
+
+        ArrayList<Tarea> listaTareasArchivo = null;
+        StringBuffer salida = new StringBuffer();
+        try {
+            listaTareasArchivo =((ArrayList<Tarea>)ois.readObject());
+        } catch (ClassNotFoundException e) {
+            JOptionPane.showMessageDialog(null, "El tipo de objetos del archivo es inadecuado.");
+        }
+        for (Tarea elemento : listaTareasArchivo) {
+            salida.append(elemento.toString() + "\n");
+        }
+        JOptionPane.showMessageDialog(null, salida);
+        ois.close();
     }
 }

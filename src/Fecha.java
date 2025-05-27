@@ -1,8 +1,9 @@
 import javax.swing.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 
-public class Fecha {
+public class Fecha implements Serializable {
     private int dia, mes, anio;
 
     public Fecha(int dia, int mes, int anio) {
