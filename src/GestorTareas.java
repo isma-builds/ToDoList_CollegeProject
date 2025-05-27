@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 public class GestorTareas {
-    // Creacion de la lista de tareas simples
+    // Creacion de la lista de tareas (simples y con fecha limite)
     private ArrayList<Tarea> listaTareas = new ArrayList<>();
 
     // ==== FUNCIONES CRUD (Create, Reading, Update and Delete) ==== //
@@ -43,19 +43,20 @@ public class GestorTareas {
         }
         return listaTareasString;
     }
-
+    //Agregar Tareas, tanto Simples como con Fecha Límte
     public void agregarTarea(){
         try {
 
             String desc = JOptionPane.showInputDialog("Tarea:");
 
             String[] seleccionEst = {"Completada", "Pendiente"};
-            String estString = (String) JOptionPane.showInputDialog(null, "Selecciona una opción", "Estado", JOptionPane.PLAIN_MESSAGE, null, seleccionEst, seleccionEst[0]);
-            boolean est = estString.equals("Completada");
-            int prioridad = Integer.parseInt(JOptionPane.showInputDialog("Prioridad:"));
+            String est = (String) JOptionPane.showInputDialog(null, "Selecciona una opción", "Estado", JOptionPane.PLAIN_MESSAGE, null, seleccionEst, seleccionEst[0]);
+            String[] seleccionPrd = {"Alta", "Media", "Baja"};
+            String prdString = (String) JOptionPane.showInputDialog(null, "Selecciona una opción", "Prioridad", JOptionPane.PLAIN_MESSAGE, null, seleccionPrd, seleccionPrd[0]);
+            int prioridad = prdString.equals("Alta") ? 1 : prdString.equals("Media") ? 2 : 3;
             String fechaLimiteTXT = JOptionPane.showInputDialog(null, "Fecha Límite:");
             if (fechaLimiteTXT == null || fechaLimiteTXT.isEmpty()) {
-                TareaSimple nuevaTareaSim = new TareaSimple(desc, est, prioridad);
+                TareaSimple nuevaTareaSim = new TareaSimple(desc, prioridad, est);
                 listaTareas.add(nuevaTareaSim);
             } else {
                 String[] partes = fechaLimiteTXT.split("/");
@@ -66,7 +67,7 @@ public class GestorTareas {
                 int mes = Integer.parseInt(partes[1]);
                 int anio = Integer.parseInt(partes[2]);
                 Fecha fechaLimite = new Fecha(dia, mes, anio);
-                TareaConFechaLimite nuevaTareaFL = new TareaConFechaLimite(desc, est, prioridad, fechaLimite);
+                TareaConFechaLimite nuevaTareaFL = new TareaConFechaLimite(desc, prioridad, est, fechaLimite);
                 listaTareas.add(nuevaTareaFL);
             }
         } catch (Exception e) {
@@ -75,8 +76,8 @@ public class GestorTareas {
         JOptionPane.showMessageDialog(null, listaTareas.toString());
     }
 
-    // Agregar Tareas (Simples o con Fecha Limite)
-    public void agregarTarea(){
+    // Agregar Tareas (Simples o con Fecha Limite) Opcion 1
+    /*public void agregarTarea(){
         // Menu inicial para agregar tarea simple o con fecha limite
         String[] menuAgregarTarea = {"Tarea Simple", "Tarea Con Fecha Limite", "Regresar"};
         String menuAggTareaOpcion = "";
@@ -129,7 +130,7 @@ public class GestorTareas {
             }
         }while(!menuAggTareaOpcion.equals("Regresar"));
         ordenarTareas();
-    }
+    }*/
 
     // Eliminar Tarea
     public void eliminarTarea(){
