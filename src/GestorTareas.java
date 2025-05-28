@@ -78,7 +78,7 @@ public class GestorTareas {
     }
 
     // Agregar Tareas (Simples o con Fecha Limite) Opcion 1
-    public void agregarTareaDos(){
+    /*public void agregarTareaDos(){
         // Menu inicial para agregar tarea simple o con fecha limite
         String[] menuAgregarTarea = {"Tarea Simple", "Tarea Con Fecha Limite", "Regresar"};
         String menuAggTareaOpcion = "";
@@ -131,7 +131,7 @@ public class GestorTareas {
             }
         }while(!menuAggTareaOpcion.equals("Regresar"));
         ordenarTareas();
-    }
+    }*/
 
     // Eliminar Tarea
     public void eliminarTarea(){
