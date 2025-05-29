@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.io.Serializable;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.Objects;
 
@@ -37,12 +38,29 @@ public class Fecha implements Serializable {
     }
 
     public void actualizarFecha(){
-        int d = Integer.parseInt(JOptionPane.showInputDialog("Nuevo Día?"));
-        int m = Integer.parseInt(JOptionPane.showInputDialog("Nuevo Mes?"));
-        int a = Integer.parseInt(JOptionPane.showInputDialog("Nuevo Año?"));
-        this.dia = d;
-        this.mes = m;
-        this.anio = a;
+//        int d = Integer.parseInt(JOptionPane.showInputDialog("Nuevo Día?"));
+//        int m = Integer.parseInt(JOptionPane.showInputDialog("Nuevo Mes?"));
+//        int a = Integer.parseInt(JOptionPane.showInputDialog("Nuevo Año?"));
+//        this.dia = d;
+//        this.mes = m;
+//        this.anio = a;
+        String fechaLimiteTXT = JOptionPane.showInputDialog(null, "Nueva Fecha Límite (DD/MM/YYYY):");
+        String[] partes = fechaLimiteTXT.split("/");
+        if (partes.length != 3) {
+            throw new IllegalArgumentException("Formato Incorrecto.");
+        }else {
+            int dia = Integer.parseInt(partes[0]);
+            int mes = Integer.parseInt(partes[1]);
+            int anio = Integer.parseInt(partes[2]);
+            try{
+//                LocalDate fechaPrueba = LocalDate.of(anio, mes, dia);
+                this.dia = dia;
+                this.mes = mes;
+                this.anio = anio;
+            }catch (DateTimeException e){
+                JOptionPane.showMessageDialog(null, "Fecha Invalida - Intente de nuevo");
+            }
+        }
     }
 
     /**
@@ -66,7 +84,7 @@ public class Fecha implements Serializable {
 
     @Override
     public String toString() {
-        return anio + "/" + mes + "/" + dia;
+        return dia + "/" + mes + "/" + anio;
     }
 
     @Override
