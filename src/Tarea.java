@@ -6,9 +6,16 @@ import java.util.Objects;
 
 public abstract class Tarea implements Serializable {
     private String descripcion;
-    private final LocalDate fechaCreacion = LocalDate.now();
+    private LocalDate fechaCreacion = LocalDate.now();
     private int prioridad = 0;
     private String estado;
+
+    public Tarea(String descripcion, LocalDate fechaCreacion, int prioridad, String estado) {
+        this.descripcion = descripcion;
+        this.fechaCreacion = fechaCreacion;
+        this.prioridad = prioridad;
+        this.estado = estado;
+    }
 
     public Tarea(String descripcion, int prioridad, String estado) {
         this.descripcion = descripcion;

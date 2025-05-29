@@ -6,6 +6,11 @@ public class TareaConFechaLimite extends TareaSimple{
     private Fecha fechaLimite;
     private boolean isVencida;
 
+    public TareaConFechaLimite(String descripcion, LocalDate fechaCreacion, int prioridad, String estado, Fecha fechaLimite) {
+        super(descripcion, fechaCreacion, prioridad, estado);
+        this.fechaLimite = fechaLimite;
+        this.isVencida = isVencida();
+    }
 
     public TareaConFechaLimite(String descripcion, int prioridad, String estado, Fecha fechaLimite) {
         super(descripcion, prioridad, estado);
