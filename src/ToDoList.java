@@ -17,16 +17,32 @@ public class ToDoList {
 
                     switch (menuPrincipalOp){
                         case "Ver Tareas":
-                            gestorDeTareas.verTareas();
+                            try{
+                                gestorDeTareas.verTareas();
+                            }catch (NullPointerException e){
+                                break;
+                            }
                             break;
                         case "Agregar Tarea":
-                            gestorDeTareas.agregarTarea();
+                            try{
+                                gestorDeTareas.agregarTarea();
+                            }catch (NullPointerException e){
+                                break;
+                            }
                             break;
                         case "Eliminar Tarea":
-                            gestorDeTareas.eliminarTarea();
+                            try{
+                                gestorDeTareas.eliminarTarea();
+                            }catch (NullPointerException e){
+                                break;
+                            }
                             break;
                         case "Actualizar Tarea":
-                            gestorDeTareas.actualizarTareas();
+                            try{
+                                gestorDeTareas.actualizarTareas();
+                            }catch (NullPointerException e){
+                                break;
+                            }
                             break;
                         case "Salir":
                             break;
