@@ -1,6 +1,7 @@
 
 import javax.swing.*;
 import java.io.*;
+import java.time.DateTimeException;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -100,7 +101,6 @@ public class GestorTareas {
                         ordenarTareasPorFL(nuevaListaOrdenadaFL);
                         break;
                 }
-                escribirArchivo("ListaDeTareas.txt", listaTareas);
             }while(!menuOrdenOp.equals("Regresar"));
         }
     }
@@ -130,13 +130,14 @@ public class GestorTareas {
                 String[] partes = fechaLimiteTXT.split("/");
                 if (partes.length != 3) {
                     throw new IllegalArgumentException("Formato Incorrecto.");
+                }else{
+                    int dia = Integer.parseInt(partes[0]);
+                    int mes = Integer.parseInt(partes[1]);
+                    int anio = Integer.parseInt(partes[2]);
+                    Fecha fechaLimite = new Fecha(dia, mes, anio);
+                    TareaConFechaLimite nuevaTareaFL = new TareaConFechaLimite(desc, prioridad, est, fechaLimite);
+                    listaTareas.add(nuevaTareaFL);
                 }
-                int dia = Integer.parseInt(partes[0]);
-                int mes = Integer.parseInt(partes[1]);
-                int anio = Integer.parseInt(partes[2]);
-                Fecha fechaLimite = new Fecha(dia, mes, anio);
-                TareaConFechaLimite nuevaTareaFL = new TareaConFechaLimite(desc, prioridad, est, fechaLimite);
-                listaTareas.add(nuevaTareaFL);
             }
             escribirArchivo("ListaDeTareas.txt", listaTareas);
         } catch (Exception e) {
@@ -255,9 +256,11 @@ public class GestorTareas {
                                         tarea = nuevaTareaFL;
                                     }
                                 }catch (Exception ex) {
-                                    JOptionPane.showMessageDialog(null, "Formato de fecha inválido. Use DD/MM/AAAA");
+                                    JOptionPane.showMessageDialog(null, ex.getMessage());
                                 }
                             }else break;
+                        }catch(IllegalArgumentException eArg){
+                            JOptionPane.showMessageDialog(null, eArg.getMessage());
                         }
                         break;
                 }
@@ -305,7 +308,7 @@ public class GestorTareas {
                     LocalDate fechaCre = (new Fecha(d,m,a)).toLocalDate();
 
                     // Transformacion de fecha limite en formato string a formato Fecha
-                    String[] partesFechaLimite = fechaCreacion.split("/");
+                    String[] partesFechaLimite = fechaLimite.split("/");
                     int dFL = Integer.parseInt(partesFechaLimite[0]);
                     int mFL = Integer.parseInt(partesFechaLimite[1]);
                     int aFL = Integer.parseInt(partesFechaLimite[2]);
