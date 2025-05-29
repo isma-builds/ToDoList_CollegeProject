@@ -118,7 +118,7 @@ public class GestorTareas {
 
             // Estado
             String[] seleccionEst = {"Completada", "Pendiente"};
-            String est = (String) JOptionPane.showInputDialog(null,"Selecciona una opción", "Estado",JOptionPane.PLAIN_MESSAGE, null, seleccionEst, seleccionEst[0]);
+            String est = (String) JOptionPane.showInputDialog(null,"Selecciona una opción", "Estado",JOptionPane.PLAIN_MESSAGE, null, seleccionEst, seleccionEst[1]);
 
             // Fecha
             String fechaLimiteTXT = JOptionPane.showInputDialog(null, "Fecha Límite (DD/MM/YYYY):");
