@@ -53,7 +53,7 @@ public class Fecha implements Serializable {
             int mes = Integer.parseInt(partes[1]);
             int anio = Integer.parseInt(partes[2]);
             try{
-//                LocalDate fechaPrueba = LocalDate.of(anio, mes, dia);
+                LocalDate fechaPrueba = LocalDate.of(anio, mes, dia);
                 this.dia = dia;
                 this.mes = mes;
                 this.anio = anio;
